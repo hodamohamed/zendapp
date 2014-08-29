@@ -1,0 +1,74 @@
+<br>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/categories/list>Home</a>
+                </li>
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/user/showprofile>Profile</a>
+                </li>
+
+
+
+                <li class="dropdown pull-right">
+                    <a href="/zendapp/public/user/logout" >Log Out</a>
+
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+<br><br>
+
+
+<div class="row">
+    <div class='col-md-12'>
+        <ul class="nav nav-pills">
+        </ul>
+
+        <div class="container-fluid" style="float:right;">
+            <div class="row-fluid" style="float:right;">
+                <div class="span12" style="float:right;">
+                    <?php
+                    if ($this->type == 1) {
+                        echo "<ul class=nav nav-list>";
+                        echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=" . $this->baseUrl() . "/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=" . $this->baseUrl() . "/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/user/listusers>user</a>
+				</li>
+			</ul>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+
+        <br><br>
+        <form method="post">
+            <strong>Send To: </strong><?= $this->sendTo_name ?><br><br>
+            <strong>Message: </strong><br><textarea name="message" cols="40" rows="10"> </textarea><br><br>
+            <input type="submit" name="send" value="Send">
+        </form>

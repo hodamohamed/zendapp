@@ -1,0 +1,146 @@
+
+<br>
+    
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+				<li class="active">
+					<a href=<?=$this->baseUrl()?>/categories/list>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/showprofile>Profile</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/choosereceiver>Send Message</a>
+				</li>
+                                
+                                <li class="dropdown pull-right">
+					 <a href="/zendapp/public/user/logout" >Log Out</a>
+					
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br> <br><br><br>
+
+<div class="container-fluid" style="float:right;">
+	<div class="row-fluid" style="float:right;">
+		<div class="span12" style="float:right;">
+                    <?php
+                        if($this->type==1){
+			echo "<ul class=nav nav-list>";
+				echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=".$this->baseUrl()."/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=".$this->baseUrl()."/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/user/listusers>user</a>
+				</li>
+			</ul>";
+                        }
+                     ?>
+		</div>
+	</div>
+</div>
+    
+<?php
+    //print_r ($this->allComments);
+    $i=1;
+    echo "<form method=post>";
+    
+    echo "<fieldset >";
+    echo "<legend > <font size=6>Show Post:</font></legend>";
+    $this->posts ->populate($this->allComments);
+    echo "<img src=".$this->img." width=60 height=60>"."&nbsp;&nbsp;&nbsp;&nbsp;<font size=3><strong>".$this->name."</strong></font>";
+    
+    //echo $this->posts->name;
+    echo "<br> <br> <font size=4>".$this->posts->title."</font>";
+    echo "<font size=4>".$this->posts->post."</font>";
+            //echo "<input type=text name=postid value=".$this->postid.">";
+    
+    echo "<br><font size=4> <strong> Comment:</strong></font><br>";
+    
+        echo "<div id=comment>";
+        foreach ($this->comments as $row){
+           // echo "<br>";
+            
+            echo "<p id=img".$i."><img src=".$row['img']." width=60 height=60>&nbsp;&nbsp;&nbsp;&nbsp;<input type=text value='".$row['fname']." ".$row['lname']."' readonly style=border:none;></p>";
+            echo "<textarea style=margin-left:60px;border:none; id=c".$i." rows=2 cols=55 readonly>".$row['comment']."</textarea>";
+            if ($this->uid==$row['users_u_id']||$this->type==1){
+                echo "<a id=e".$i." href=http://localhost".$this->baseUrl()."/comments/edit/commentid/".$row['co_id']."/postid/".$this->postid."/page/posts><img src=".$this->baseUrl()."/images/edit.jpg width=42 height=25></a>";
+                echo "&nbsp;&nbsp;<a id=d".$i." onClick= delet(".$row['co_id'].",".$i.")><img src=".$this->baseUrl()."/images/delete.jpg width=42 height=25></a>";
+            }
+            $i++;
+           
+        }
+        echo "</div>";
+        if($this->lock == 'unlock'||$this->type==1){
+        echo $this->posts->addcomment;
+        echo "<font size=4>".$this->posts->add."</font>";
+        }
+         echo "</fieldset >";
+    echo "</form>";
+    ?>
+
+    <script>
+	var ajaxRequest;
+	ajaxRequest=new XMLHttpRequest();
+
+	function delet (id,i){
+		var ajaxRequest;
+		if (window.XMLHttpRequest){
+			ajaxRequest=new XMLHttpRequest();
+		}
+		else{
+			ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		//var name;
+                var comment;
+                var comments;
+                var edit;
+                var del;
+                var img;
+                 alert (i)
+                comment=document.getElementById("comment");
+		//name=document.getElementById('name'+i);
+                comments=document.getElementById('c'+i);
+                edit=document.getElementById('e'+i);
+                del=document.getElementById('d'+i);
+                img=document.getElementById('img'+i);
+                //break1=document.getElementById('b'+i);
+                //alert (document.getElementById("comment"));
+               //console.log (break1);
+		ajaxRequest.onreadystatechange=function(){
+			if (ajaxRequest.readyState==4){
+				//comment.removeChild(name);
+                                comment.removeChild(comments);
+                                comment.removeChild(edit);
+                                comment.removeChild(del);
+                                comment.removeChild(img);
+			}	
+		}
+               
+		//var parameters="name="+name+"&id="+id;
+		ajaxRequest.open("GET","http://localhost/zendapp/public/comments/delete?commentid="+id, true);
+		//ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		ajaxRequest.send(null);
+	}
+        </script>

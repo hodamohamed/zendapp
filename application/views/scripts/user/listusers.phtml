@@ -1,0 +1,209 @@
+
+
+<br>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/categories/list>Home</a>
+                </li>
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/user/showprofile>Profile</a>
+                </li>
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/user/choosereceiver>Send Message</a>
+                </li>
+
+
+
+                <li class="dropdown pull-right">
+                    <a href="/zendapp/public/user/logout" >Log Out</a>
+
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+<br><br>
+<div class="row">
+    <div class="col-md-8">
+        <ul class="nav nav-pills">
+            <li class="active"><a href=<?= $this->baseUrl() ?>/user/adduser>Add User</a></li>
+
+        </ul>
+
+
+    </div>
+</div>
+
+<br><br>
+
+<div class="row">
+    <div class='col-md-12'>
+        <ul class="nav nav-pills">
+        </ul>
+
+        <div class="container-fluid" style="float:right;">
+            <div class="row-fluid" style="float:right;">
+                <div class="span12" style="float:right;">
+                    <?php
+                    if ($this->type == 1) {
+                        echo "<ul class=nav nav-list>";
+                        echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=" . $this->baseUrl() . "/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=" . $this->baseUrl() . "/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=" . $this->baseUrl() . "/user/listusers>user</a>
+				</li>
+			</ul>";
+                    }
+                    ?>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <?php
+        if ($this->state == 'true') {
+            echo ('Lock System: <td><input type=checkbox checked id=state  onchange=sysState()><br><br>');
+        } else {
+            echo ('Lock System: <td><input type=checkbox id=state  onchange=sysState()><br><br>');
+        }
+
+        echo( "<table id=table class=table>");
+        echo '<tr  class=Danger><td>Name<td>E-mail<td>Gender<td>Edit_Info<td> Delete<td>Type<td>Ban';
+        foreach ($this->users as $user) {
+
+            echo ("<tr>");
+            echo("<td  class=Danger>" . $user['fname'] . " " . $user['lname']);
+            echo("<td>" . $user['email']);
+            if ($user['gender'] == '0') {
+                echo("<td>Female");
+            } else {
+                echo("<td>Male");
+            }
+            echo ('<td><a href=edituser/u_id/' . $user['u_id'] . '> Edit_Info</a>');
+            echo ('<td><button onclick=deleteUser(' . $user['u_id'] . ',this)>Delete</button>');
+            echo ('<td><input type=radio name=' . $user['u_id'] . ' value=Admin onclick=changeType(' . $user['u_id'] . ',1)>Admin<br>');
+            echo ('<br><input type=radio name=' . $user['u_id'] . ' value=Regular onclick=changeType(' . $user['u_id'] . ',0)>Regular<br>');
+
+
+            if ($user['ban'] == 'true') {
+                echo ('<td><input type=checkbox id=' . $user['u_id'] . ' checked onchange=banUser(' . $user['u_id'] . ')><br>');
+            } else {
+                echo ('<td><input type=checkbox  id=' . $user['u_id'] . ' onchange=banUser(' . $user['u_id'] . ')><br>');
+            }
+
+            echo("</tr>");
+        }
+
+        echo '</table>';
+        ?>
+
+        <script>
+
+
+            var banUser = function(u_id) {
+                var ban = document.getElementById(u_id);
+                if (ban.checked === true) {
+                    //alert("checked works");
+
+                }
+                ajaxRequest = new XMLHttpRequest();
+                ajaxRequest.onreadystatechange = function() {
+                    if (ajaxRequest.readyState === 4) {
+
+                    }
+                };
+
+                ajaxRequest.open("POST", "banuser", true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.send("u_id=" + u_id + "&ban=" + ban.checked);
+
+            };
+
+
+            var deleteUser = function(u_id, r) {
+                ajaxRequest = new XMLHttpRequest();
+
+
+                ajaxRequest.onreadystatechange = function() {
+                    if (ajaxRequest.readyState === 4) {
+                        var i = r.parentNode.parentNode.rowIndex;
+                        document.getElementById("table").deleteRow(i);
+                    }
+                };
+
+                ajaxRequest.open("POST", "deleteuser", true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.send("u_id=" + u_id);
+            };
+
+
+            var changeType = function(u_id, type) {
+                ajaxRequest = new XMLHttpRequest();
+
+
+                ajaxRequest.onreadystatechange = function() {
+                    if (ajaxRequest.readyState === 4) {
+                        /* var i = r.parentNode.parentNode.rowIndex;
+                         document.getElementById("table").deleteRow(i);*/
+                    }
+                };
+
+                ajaxRequest.open("POST", "setprivilage", true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.send("u_id=" + u_id + "&privilage=" + type);
+            };
+
+
+
+            var sysState = function() {
+                ajaxRequest = new XMLHttpRequest();
+                var state = document.getElementById("state");
+
+                ajaxRequest.onreadystatechange = function() {
+                    if (ajaxRequest.readyState === 4) {
+                        /* var i = r.parentNode.parentNode.rowIndex;
+                         document.getElementById("table").deleteRow(i);*/
+                    }
+                };
+
+                ajaxRequest.open("POST", "systemstate", true);
+                ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+                ajaxRequest.send("state=" + state.checked);
+            };
+
+
+
+        </script>

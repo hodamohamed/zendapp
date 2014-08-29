@@ -1,0 +1,46 @@
+<div class="item active">
+                        <img alt="" src="/zendapp/images/logo.png" style="width: 150;height: 80"/>
+                        
+</div>
+<html>
+    <head>
+
+        <meta charset="utf-8">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>Zend Project</title>
+
+        <!-- Bootstrap -->
+        <link href="<?= $this->baseUrl() ?>/css/bootstrap.min.css" rel="stylesheet">
+
+        <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+        <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+        <!--[if lt IE 9]>
+          <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+          <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+        <![endif]-->
+    </head>
+    <body style="color:#944242">
+        <div class="container">
+
+            
+            
+            <div class="row">
+                <div class="col-md-10">
+                    <?php echo $this->layout()->content; ?>
+                </div>
+                <div class="col-md-4"></div>
+            </div>
+            <!--<div class="row">
+                <div class="col-md-12"></div>
+            </div>-->
+
+        </div>
+
+
+        <!-- jQuery (necessary for Bootstrap's JavaScript plugins) -->
+        <script src="<?= $this->baseUrl() ?>/js/jquery-2.1.0.min.js"></script>
+        <!-- Include all compiled plugins (below), or include individual files as needed -->
+        <script src="<?= $this->baseUrl() ?>/js/bootstrap.min.js"></script>
+    </body>
+</html>

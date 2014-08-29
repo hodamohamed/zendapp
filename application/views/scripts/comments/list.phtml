@@ -1,0 +1,133 @@
+
+
+<br>
+    
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/categories/list>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/showprofile>Profile</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/choosereceiver>Send Message</a>
+				</li>
+                                
+                                <li class="dropdown pull-right">
+					 <a href="/zendapp/public/user/logout" >Log Out</a>
+					
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br>
+
+
+<br><br><br>
+<div class="container-fluid" style="float:right;">
+	<div class="row-fluid" style="float:right;">
+		<div class="span12" style="float:right;">
+                    <?php
+                        if($this->type==1){
+			echo "<ul class=nav nav-list>";
+				echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=".$this->baseUrl()."/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=".$this->baseUrl()."/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/user/listusers>user</a>
+				</li>
+			</ul>";
+                        }
+                     ?>
+		</div>
+	</div>
+</div>
+    
+
+<?php
+        //print_r ($this->posts);
+        $tableno=1;
+        echo "<form method=get action=add>";
+        echo "</form>";
+        //http://localhost/zendapp/public/posts/showpost/postid/8
+        foreach ($this->posts as $dis){
+            $i=1;
+            echo "<table class=table id=commentTable".$tableno."><br>";
+            echo "<h3><u>Post Title:</u> &nbsp;&nbsp;&nbsp;&nbsp;".$dis['title']."</h3> <br>";
+            echo "<tr class=Danger>";
+//            echo "<td>postTitle</td>";
+            echo "<td>comments</td>";
+            echo "<td>edit</td>";
+            echo "<td>delete</td>";
+            echo "</tr>";
+            foreach ($this->comments as $row){
+                if ($dis['p_id']==$row['post_p_id']){
+                    echo "<tr>";
+  //                  echo "<td id=n".$row['co_id'].">".$row['title']."</td>";
+                    echo "<td> <a href=http://localhost".$this->baseUrl()."/posts/showpost/postid/".$row['post_p_id'].">".$row['comment']."</a></td>";
+                    if ($this->uid==$row['users_u_id']||$this->type==1){
+                            echo "<td> <a href=edit/commentid/".$row['co_id']."><img src=".$this->baseUrl()."/images/edit.jpg width=42 height=25></a></td>";
+                            echo "<td> <a onClick= delet(".$row['co_id'].",".$i.",".$tableno.")><img src=".$this->baseUrl()."/images/delete.jpg width=42 height=25></a></td>";
+                            
+                    }
+                    else{
+                            echo "<td> </td>";
+                            echo "<td> </td>";
+                    }
+                    echo "</tr>";
+                    $i++;
+                }
+            }
+            $tableno++;
+            echo "</table>";
+        }
+  ?>
+
+    
+    <script>
+	var ajaxRequest;
+	ajaxRequest=new XMLHttpRequest();
+
+	function delet (id,i,t){
+		var ajaxRequest;
+		if (window.XMLHttpRequest){
+			ajaxRequest=new XMLHttpRequest();
+		}
+		else{
+			ajaxRequest=new ActiveXObject("Microsoft.XMLHTTP");
+		}
+		var name;
+		name=document.getElementById('n'+id).value;
+		ajaxRequest.onreadystatechange=function(){
+			if (ajaxRequest.readyState==4){
+				document.getElementById("commentTable"+t).deleteRow(i);
+			}	
+		}
+		//var parameters="name="+name+"&id="+id;
+		ajaxRequest.open("GET","http://localhost/zendapp/public/comments/delete?commentid="+id, true);
+		//ajaxRequest.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+		ajaxRequest.send(null);
+	
+	}
+        </script>

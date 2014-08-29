@@ -1,0 +1,29 @@
+
+<br>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+				<li class="active">
+					<a href=<?=$this->baseUrl()?>/home>Home</a>
+				</li>
+                               
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br><br>
+
+<?php
+    echo '<form method=post action='.$this->baseUrl().'/user/login>';
+    echo $this->logInForm;
+    echo '</form>';
+ ?>
+
+<br>
+<h5>If you don't have an account please <a href=<?=$this->baseUrl()?>/user/signup>Sign Up...</a></h5>

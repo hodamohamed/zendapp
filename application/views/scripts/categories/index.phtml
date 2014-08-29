@@ -1,0 +1,26 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>Categories</b> and script/action name <b>index</b></p>
+</div>
+
+<form method="get" >
+    Title: <input id="title" type="text" name="title"><br>
+    Post: <textarea id="post" name="post"></textarea><br>
+    <input type="submit" id="submit" value="Send Post"> 
+</form>
+
+
+<?php
+$data = range(1, 100);
+ 
+// Get a Paginator object using Zend_Paginator's built-in factory.
+$paginator = Zend_Paginator::factory($data);
+$paginator->setCurrentPageNumber(2); 
+?><ul><?php
+ 
+// Render each item for the current page in a list-item
+foreach ($paginator as $item) {
+    echo '<li>' . $item . '</li>';
+}
+ 
+?></ul>

@@ -1,0 +1,23 @@
+<br /><br />
+<div id="view-content">
+	<p>View script for controller <b>Threads</b> and script/action name <b>index</b></p>
+</div>
+
+<div id="view-content">
+<form method='post' id="bins" name="myform">
+    <table border="1">
+        <th>BIN</th>
+        <th>COMP_DIV</th>
+        <th>STY_RET_TYPE</th>
+        <th>STY_PDT_TYPE</th>
+        <th>PRICE_POINT</th>
+        <th>STORAGE_TYPE</th>
+
+        <?php echo $this->partialLoop('threads/readall.phtml', $this->readall); ?>
+
+        <td><input type=checkbox value="Check All" onClick="this.value=check(this.form.list)" /></td>
+    </table>
+
+    <input type='submit' name='submit' value='move' />
+</form>            
+<?php echo $this->paginationControl($this->readall, 'Sliding', 'pagination_controls.phtml'); ?>

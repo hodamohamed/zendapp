@@ -1,0 +1,58 @@
+
+<br>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+				<li class="active">
+					<a href=<?=$this->baseUrl()?>/home>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/login>Log In</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/signup>Sign Up</a>
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br><br>
+<div class="row clearfix">
+    <div class="col-md-12 column">
+        
+                
+                <div class="item">
+                    <img alt="" src="/zendapp/images/welcome.jpg" style="width: 110% ;height: 25%"/>
+
+                </div>
+                
+
+          
+    </div>
+</div>
+
+
+<?php
+  
+        echo "<br><br><br><br>";
+        echo "<table class=table id=catTable style=width:100%;>";
+        echo "<tr class=Danger>";
+        echo "<td>category</td>";
+        echo "</tr>";
+        foreach ($this->categories as $row){
+            
+           echo "<tr>";
+           echo "<td id=n".$row['c_id']."><a href=http://localhost".$this->baseUrl()."/user/login>".$row['name']."</a></td>";
+            
+           echo "</tr>";
+            
+        }
+       echo "</table>";
+    ?>
+

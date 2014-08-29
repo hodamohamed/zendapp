@@ -1,0 +1,90 @@
+
+
+<br>
+    
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                          
+                            	<li class="active">
+					<a href=<?=$this->baseUrl()?>/categories/list>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/showprofile>Profile</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/choosereceiver>Send Message</a>
+				</li>
+                                
+                                <li class="dropdown pull-right">
+					 <a href="/zendapp/public/user/logout" >Log Out</a>
+					
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br>
+
+
+<br><br><br>
+<div class="container-fluid" style="float:right;">
+	<div class="row-fluid" style="float:right;">
+		<div class="span12" style="float:right;">
+                    <?php
+                        if($this->type==1){
+			echo "<ul class=nav nav-list>";
+				echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=".$this->baseUrl()."/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=".$this->baseUrl()."/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/user/listusers>user</a>
+				</li>
+			</ul>";
+                        }
+                     ?>
+		</div>
+	</div>
+</div>
+
+<form method=post>
+
+<?php
+    //echo "<form method=post>";
+
+    echo "<fieldset >";
+    echo "<legend > <font size=6>Edit Comment:</font></legend>";
+    $pData = explode(",", $this->pName);
+    $cData = explode(",", $this->cName);
+    //print_r( $pData);
+    echo "<font size=3><strong><img src=".$pData[1]." width=60 height=60>&emsp;<input type=text value='".  $pData[0]."'readonly style=border:none></strong></font>";
+    $this->comment ->populate($this->commentdata);
+    echo "<font size=4>".$this->comment->title."</font>";
+    echo "<font size=4>".$this->comment->post."</font>";
+       echo "<br>";
+          echo "<br>";
+    echo "<font size=4><strong><img src=".$cData[1]." width=60 height=60>&emsp;<input type=text value='".  $cData[0]."' readonly style=border:none></strong></font>";
+    echo "<br>";
+    echo "<font size=4>".$this->comment->comment."</font>";
+    echo "</fieldset>";
+    echo "<font size=4>".$this->comment->submit."</font>";
+  ?>
+       </form>
+  

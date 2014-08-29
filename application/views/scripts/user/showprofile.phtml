@@ -1,0 +1,99 @@
+
+
+
+
+<div class="container" style="border:3px ridge;">
+    
+    
+    
+<br>
+
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+				<li class="active">
+					<a href=<?=$this->baseUrl()?>/categories/list>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/editprofile>Edit Profile</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/choosereceiver>Send Message</a>
+				</li>
+                                
+                               
+                                
+                                <li class="dropdown pull-right">
+					 <a href="/zendapp/public/user/logout" >Log Out</a>
+					
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+
+ <br><br><br> 
+    
+    
+  
+    <br>
+    <div class="row clearfix">
+        
+        <div class="col-md-8 column">
+
+            <div class="col-md-12 column" style="position: absolute;left: 500;top: 10">
+            <img alt="140x140" width="150" height="300" class="img-thumbnail"  src=<?= $this->data['img'] ?> />
+            </div>
+            
+            <ul>
+                <?php
+                echo "<font size=4>";
+                echo '<li><strong>Name:</strong>&nbsp;&nbsp;&nbsp;' . $this->data['fname'] . '&nbsp;' . $this->data['lname'] . '</li>';
+                echo '<li><strong>E-Mail:</strong>&nbsp;&nbsp;&nbsp;' . $this->data['email'] . '</li>';
+                echo '<li><strong>Country:</strong>&nbsp;&nbsp;&nbsp;' . $this->data['country'] . '</li>';
+                $gender = ($this->data['gender'] == '0') ? 'Female' : 'Male';
+                echo '<li><strong>Gender:</strong>&nbsp;&nbsp;&nbsp;' . $gender . '</li>';
+                $type = ($this->data['type'] == '0') ? 'Regular User' : 'Administrator';
+                echo '<li><strong>Type:</strong>&nbsp;&nbsp;&nbsp;' . $type . '</li>';
+                echo "</font>";
+                ?>
+
+            </ul>
+        </div>
+        
+
+    </div>
+    <br><br><br><br><br><br>
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <div class="carousel slide" id="carousel-153253">
+                
+                <div class="carousel-inner">
+                    <div class="item">
+                        <img alt="" src="/zendapp/images/img1.jpg" style="width: 1150;height: 300" />
+                        
+                    </div>
+                    <div class="item">
+                        <img alt="" src="/zendapp/images/img2.jpg" style="width: 1150;height: 300"/>
+                       
+                    </div>
+                    <div class="item active">
+                        <img alt="" src="/zendapp/images/img3.jpg" style="width: 1150;height: 300"/>
+                        
+                    </div>
+  
+                </div> <a class="left carousel-control" href="#carousel-153253" data-slide="prev"><span class="glyphicon glyphicon-chevron-left"></span></a> <a class="right carousel-control" href="#carousel-153253" data-slide="next"><span class="glyphicon glyphicon-chevron-right"></span></a>
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+

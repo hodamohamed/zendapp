@@ -1,0 +1,24 @@
+<br />
+<div id="view-content">
+	<p>View script for controller <b>Forums</b> and script/action name <b>listSepecific</b></p>
+</div>
+
+<?php
+        echo "<form method=get action=add>";
+        echo "<input type=submit name=submit value=add>";
+        echo "</form>";
+        echo "<table border=1 width=400>";
+        echo "<tr>";
+        echo "<td>forum</td>";
+        echo "<td>edit</td>";
+        echo "<td>delete</td>";
+        echo "</tr>";
+        foreach ($this->forums as $row){
+            
+           echo "<tr>";
+           //echo "<td>".$row['f_name']."</td>";
+           echo "<td> <a href=http://localhost".$this->baseUrl()."/posts/listsepecific/forumid/".$row['f_id'].">".$row['f_name']."</a> </td>";
+           echo "<td> <a href=edit/forumid/".$row['f_id'].">edit</a></td>";
+           echo "<td> <a href=delete/forumid/".$row['f_id'].">delete</a></td>";
+        }
+  ?>

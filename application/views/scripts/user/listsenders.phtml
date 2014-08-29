@@ -1,0 +1,53 @@
+
+
+<br>
+
+<div class="container">
+    <div class="row clearfix">
+        <div class="col-md-12 column">
+            <ul class="nav nav-tabs">
+
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/categories/list>Home</a>
+                </li>
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/user/showprofile>Profile</a>
+                </li>
+                <li class="active">
+                    <a href=<?= $this->baseUrl() ?>/user/choosereceiver>Send Message</a>
+                </li>
+
+
+
+                <li class="dropdown pull-right">
+                    <a href="/zendapp/public/user/logout" >Log Out</a>
+
+                </li>
+
+
+            </ul>
+        </div>
+    </div>
+
+</div>
+
+
+
+
+
+
+
+
+
+
+<br><br>
+
+
+
+<?php
+    foreach ($this->senders as $sender) {
+        echo ('<br><a href=showmessage/sendTo_Id/' . $sender['sendTo_id'] . '/sendFrom_Id/' . $sender['sendFrom_id'] . '><strong>' . $sender['sendFrom_name'] . '</a>');
+    }
+?>
+
+

@@ -1,0 +1,121 @@
+
+
+<br>
+    
+<div class="container">
+	<div class="row clearfix">
+		<div class="col-md-12 column">
+			<ul class="nav nav-tabs">
+                            
+				<li class="active">
+					<a href=<?=$this->baseUrl()?>/categories/list>Home</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/showprofile>Profile</a>
+				</li>
+                                <li class="active">
+					<a href=<?=$this->baseUrl()?>/user/choosereceiver>Send Message</a>
+				</li>
+                                
+                                <li class="dropdown pull-right">
+					 <a href="/zendapp/public/user/logout" >Log Out</a>
+					
+				</li>
+                                
+                                
+			</ul>
+                </div>
+        </div>
+		
+</div>
+<br>
+
+
+<br><br><br>
+<div class="container-fluid" style="float:right;">
+	<div class="row-fluid" style="float:right;">
+		<div class="span12" style="float:right;">
+                    <?php
+                        if($this->type==1){
+			echo "<ul class=nav nav-list>";
+				echo "<li class=nav-header>
+					List Options
+				</li>
+				<li class=active>
+					<a href=".$this->baseUrl()."/categories/list>Category</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/forums/list>Forum</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/posts/list>Post</a>
+				</li>
+				
+				<li>
+					<a href=".$this->baseUrl()."/comments/list>Comment</a>
+				</li>
+				<li>
+					<a href=".$this->baseUrl()."/user/listusers>user</a>
+				</li>
+			</ul>";
+                        }
+                     ?>
+		</div>
+	</div>
+</div>
+<?php
+    //echo "hello".$this->categoryId;
+    echo "<form method=post>";
+    echo "<fieldset >";
+    echo "<legend > <font size=6>Edit Forum:</font></legend>";
+    $this->forum ->populate($this->cat);
+    echo "<font size=4>".$this->forum->f_name."</font>";
+    echo "<font size=4>". $this->forum->name."</font>";
+    echo "<br><font size=4><strong>Change Category: </font><br>";
+    echo "&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;";
+        echo "<select name=changeCat style=width:150px;height:30px;>";
+        foreach ($this->allCat as $row){
+                if ($this->categoryId==$row['c_id']||$this->catgId==$row['c_id']){
+                        echo "<option selected value=".$row['c_id'].">".$row['name']."</option>";
+                }
+                else{
+                        echo "<option value=".$row['c_id'].">".$row['name']."</option>"; 
+                }
+        }
+        echo "</select>";
+         echo "</br>";
+         echo "<font size=4>".$this->forum->flag."</font>";
+   ?>
+<br>
+<font size=4><strong> Change Lock:</strong></font><br>
+    &emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;&emsp;
+    <select name=changeLock style="width:150px;height:30px;">
+        <option value="unlock">unlock</option>
+        <option value="lock">lock</option>
+    </select><br>
+    <?php
+    echo "<font size=4>".$this->forum->submit."</font>";
+    echo "</fieldset>";
+    echo "</form>";
+/*
+<form method="post">
+    forumName:<input type="text" name="forum" value="<?= $this->forumName?>"><br>
+    categoryName:<input type="text" name="catname" value="<?= $this->catName?>" readonly><br>
+    changeCategory:
+    <?php
+        echo "<select name=changeCat>";
+        foreach ($this->allCat as $row){
+               echo "<option value=".$row['c_id'].">".$row['name']."</option>";      
+        }
+        echo "</select>";
+         echo "</br>";
+    ?>    
+    lock:<input type="text" name="lock" value="<?= $this->lock?>" readonly><br>
+    changeLock:<select name=changeLock>
+        <option value="0">unlocked(0)</option>
+        <option value="1">locked(1)</option>
+    </select><br>
+    <input type="submit" name="submit" value="edit"><br>    
+</form>
+ * */
+    ?>

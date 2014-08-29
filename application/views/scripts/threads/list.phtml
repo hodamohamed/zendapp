@@ -1,0 +1,38 @@
+<br /><br />
+<div id="view-content">
+
+  <div id="row" class="row">
+                <div class="col-md-12">
+                    <ul class="nav nav-pills">
+                        <li class="active"><a href=<?=$this->baseUrl()?>/categories/list>Category</a></li>
+                        <li class="active"><a href=<?=$this->baseUrl()?>/user/adduser>User</a></li>
+                        <li class="active"><a href=<?=$this->baseUrl()?>/forums/list>Forum</a></li>
+                        <li class="active"><a href=<?=$this->baseUrl()?>/posts/list>Post</a></li>
+                        <li class="active"><a href=<?=$this->baseUrl()?>/comments/list>Comment</a></li>
+                    </ul>
+                </div>
+            </div>
+    <br>
+    
+
+<?php
+       // echo count($this->categories);
+        //print_r($this->categories);
+echo $this->baseUrl();
+        echo "<form method=get action=add>";
+        echo "<input type=submit name=submit value=add>";
+        echo "</form>";
+        echo "<table border=1 width=400>";
+        echo "<tr>";
+        echo "<td>thread</td>";
+        echo "<td>edit</td>";
+        echo "<td>delete</td>";
+        echo "</tr>";
+        foreach ($this->threads as $row){
+            
+           echo "<tr>";
+           echo "<td>".$row['title']."</td>";
+           echo "<td> <a href=edit/catid/".$row['p_id'].">edit</a></td>";
+           echo "<td> <a href=delete/catid/".$row['p_id'].">delete</a></td>";
+        }
+    ?>
